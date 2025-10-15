@@ -1,12 +1,12 @@
 package com.example.simpleeditor
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.chaquo.python.PyException
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import com.example.simpleeditor.databinding.ActivityMainBinding
-
-private const val PREFS_NAME = "editor"
-private const val PREF_KEY_CONTENT = "content"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,19 +16,42 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        binding.editorView.setText(preferences.getString(PREF_KEY_CONTENT, ""))
+        ensurePython()
+        resetOutput()
 
-        binding.saveButton.setOnClickListener {
-            val text = binding.editorView.text?.toString().orEmpty()
-            preferences.edit().putString(PREF_KEY_CONTENT, text).apply()
-            Toast.makeText(this, R.string.saved_message, Toast.LENGTH_SHORT).show()
+        binding.runButton.setOnClickListener {
+            val code = binding.editorView.text?.toString().orEmpty()
+            val result = runPythonCode(code)
+            binding.outputView.text = if (result.isBlank()) getString(R.string.empty_output) else result
+            binding.outputScroll.post { binding.outputScroll.fullScroll(View.FOCUS_DOWN) }
         }
 
         binding.clearButton.setOnClickListener {
             binding.editorView.text?.clear()
-            preferences.edit().remove(PREF_KEY_CONTENT).apply()
-            Toast.makeText(this, R.string.cleared_message, Toast.LENGTH_SHORT).show()
+            resetOutput()
+        }
+    }
+
+    private fun ensurePython() {
+        if (!Python.isStarted()) {
+            Python.start(AndroidPlatform(this))
+        }
+    }
+
+    private fun resetOutput() {
+        binding.outputView.text = getString(R.string.empty_output)
+    }
+
+    private fun runPythonCode(code: String): String {
+        if (code.isBlank()) {
+            return ""
+        }
+        return try {
+            val python = Python.getInstance()
+            val module = python.getModule("runner")
+            module.callAttr("run_user_code", code).toString()
+        } catch (error: PyException) {
+            error.message ?: error.toString()
         }
     }
 }

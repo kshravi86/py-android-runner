@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Simple Editor</string>
-    <string name="editor_hint">Start typing...</string>
-    <string name="save">Save</string>
+    <string name="app_name">Python Runner</string>
+    <string name="code_label">Python code</string>
+    <string name="editor_hint">Write Python code here...</string>
+    <string name="run">Run</string>
     <string name="clear">Clear</string>
-    <string name="saved_message">Text saved</string>
-    <string name="cleared_message">Text cleared</string>
+    <string name="output_label">Output</string>
+    <string name="empty_output">No output yet.</string>
 </resources>
