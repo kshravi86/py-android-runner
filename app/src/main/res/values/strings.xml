@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Simple Editor</string>
+    <string name="editor_hint">Start typing...</string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
+    <string name="saved_message">Text saved</string>
+    <string name="cleared_message">Text cleared</string>
+</resources>
