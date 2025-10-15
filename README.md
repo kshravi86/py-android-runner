@@ -2,9 +2,9 @@
 
 This Android sample ships with an embedded Chaquopy interpreter so you can write and execute Python snippets completely offline. The screen provides:
 
-- A monospace editor for typing Python
+- A monospace editor pre-populated with a Hello World script (executed automatically on launch)
 - `Run` to execute the current buffer inside the bundled interpreter
-- `Clear` to reset both the editor and output area
+- `Clear` to reset the editor and output area
 - A scrollable output panel which captures stdout, stderr, and tracebacks
 
 ## GitHub Actions build

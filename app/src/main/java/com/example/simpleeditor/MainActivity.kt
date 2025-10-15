@@ -17,13 +17,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         ensurePython()
-        resetOutput()
+        setupDefaultCode(savedInstanceState)
 
         binding.runButton.setOnClickListener {
             val code = binding.editorView.text?.toString().orEmpty()
             val result = runPythonCode(code)
-            binding.outputView.text = if (result.isBlank()) getString(R.string.empty_output) else result
-            binding.outputScroll.post { binding.outputScroll.fullScroll(View.FOCUS_DOWN) }
+            displayResult(result)
         }
 
         binding.clearButton.setOnClickListener {
@@ -38,8 +37,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupDefaultCode(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null && binding.editorView.text.isNullOrBlank()) {
+            val starterCode = getString(R.string.default_code)
+            binding.editorView.setText(starterCode)
+            binding.editorView.setSelection(starterCode.length)
+            displayResult(runPythonCode(starterCode))
+        } else if (binding.outputView.text.isNullOrBlank()) {
+            resetOutput()
+        }
+    }
+
     private fun resetOutput() {
         binding.outputView.text = getString(R.string.empty_output)
+    }
+
+    private fun displayResult(result: String) {
+        val text = result.ifBlank { getString(R.string.empty_output) }
+        binding.outputView.text = text
+        binding.outputScroll.post { binding.outputScroll.fullScroll(View.FOCUS_DOWN) }
     }
 
     private fun runPythonCode(code: String): String {
