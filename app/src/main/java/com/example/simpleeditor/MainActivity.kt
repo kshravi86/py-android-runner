@@ -35,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         setupCodeEditor()
         setupDefaultCode(savedInstanceState)
         setupToolbarActions()
+        binding.fabRun.setOnClickListener {
+            val code = getEditorText()
+            val result = runPythonCode(code)
+            displayResult(result)
+        }
     }
 
     private fun ensurePython() {
@@ -130,7 +135,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupCodeEditor() {
         val enabledTm = tryEnableTextMate()
         binding.editorView.setLineNumberEnabled(true)
-        binding.editorView.setTextSize(14f)
+        binding.editorView.setTextSize(18f)
     }
 
     private fun tryEnableTextMate(): Boolean {
