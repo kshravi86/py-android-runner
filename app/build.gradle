@@ -48,6 +48,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+    implementation 'androidx.transition:transition:1.4.1'
+    implementation 'io.noties.markwon:core:4.6.2'
 
     // Core library desugaring for language-textmate dependencies
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
@@ -60,3 +63,21 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+// Fetch and bundle a small TTF code font at build time (SIL OFL licensed Fira Code Regular)
+def fontDir = file("${projectDir}/src/main/res/font")
+def fontFile = new File(fontDir, "firacode_regular.ttf")
+tasks.register('fetchCodeFont') {
+    doLast {
+        if (!fontFile.exists()) {
+            fontDir.mkdirs()
+            new URL("https://github.com/JetBrains/JetBrainsMono/raw/master/fonts/ttf/JetBrainsMono-Regular.ttf").withInputStream { i ->
+                fontFile.withOutputStream { o -> o << i }
+            }
+            println "Fetched code font: ${fontFile}"
+        }
+    }
+}
+
+// Ensure font exists before resource processing
+preBuild.dependsOn tasks.named('fetchCodeFont')

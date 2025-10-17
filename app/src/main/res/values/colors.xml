@@ -1,13 +1,19 @@
 <resources>
-    <!-- Brand colors (light) -->
-    <color name="brand_primary">#1565C0</color>
+    <!-- Purple-forward Material 3-like palette (light) -->
+    <color name="brand_primary">#6750A4</color>
     <color name="brand_on_primary">#FFFFFF</color>
-    <color name="brand_secondary">#EF6C00</color>
+    <color name="brand_secondary">#625B71</color>
     <color name="brand_on_secondary">#FFFFFF</color>
-    <color name="brand_surface">#F8FAFF</color>
-    <color name="brand_on_surface">#1B1B1F</color>
-    <color name="brand_surface_variant">#E7EAF0</color>
-    <color name="brand_on_surface_variant">#42464F</color>
-    <color name="brand_outline">#73777F</color>
+    <color name="brand_surface">#FFFBFE</color>
+    <color name="brand_on_surface">#1C1B1F</color>
+    <color name="brand_surface_variant">#E7E0EC</color>
+    <color name="brand_on_surface_variant">#49454F</color>
+    <color name="brand_outline">#79747E</color>
     <color name="brand_error">#B3261E</color>
+    <!-- Terminal + accent -->
+    <color name="terminal_bg">#0D1117</color>
+    <color name="terminal_text">#E6EDF3</color>
+    <color name="terminal_dim">#8B949E</color>
+    <color name="terminal_green">#3FB950</color>
+    <color name="sky_blue">#29B6F6</color>
 </resources>

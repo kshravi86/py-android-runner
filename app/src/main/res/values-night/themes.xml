@@ -11,4 +11,11 @@
         <item name="colorOnSurfaceVariant">@color/brand_on_surface_variant</item>
         <item name="colorOutline">@color/brand_outline</item>
     </style>
+
+    <style name="Theme.PythonRunner.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenBackground">@color/brand_primary</item>
+        <item name="postSplashScreenTheme">@style/Theme.PythonRunner</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 </resources>

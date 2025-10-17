@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Python Runner</string>
+    <string name="app_name">PyRocket</string>
     <string name="code_label">Python code</string>
     <string name="editor_hint">Write Python code here...</string>
     <string name="run">Run</string>
@@ -7,4 +7,10 @@
     <string name="output_label">Output</string>
     <string name="empty_output">No output yet.</string>
     <string name="default_code">print(&quot;Hello from Python!&quot;)&#10;for i in range(3):&#10;    print(f&quot;Counting {i}&quot;)</string>
+    <string name="app_tagline">Write • Run • Enjoy</string>
+    <string name="run_cell">Run Cell</string>
+    <string name="run_all">Run All</string>
+    <string name="add_cell">Add Cell</string>
+    <string name="clear_output">Clear Output</string>
+    <string name="reset_session">Reset Session</string>
 </resources>
